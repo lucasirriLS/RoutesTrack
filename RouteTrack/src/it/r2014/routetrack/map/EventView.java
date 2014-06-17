@@ -20,14 +20,13 @@ public class EventView implements Serializable {
 	private int zoom = 6;
 	private double  latitudeStart= 42.14000; // 37.13 ; 
 	private double  longitudeStart= 11.8300 ; //22.43;
-	private MapModel simpleModel;
+	private final static MapModel simpleModel = new DefaultMapModel();
 	private Integer refresh = 10;
 	private Marker marker;
 	
 	@PostConstruct
 	public void init() {
 		
-		simpleModel = new DefaultMapModel();
 		popolateModel(simpleModel);
 		
 	}
@@ -39,6 +38,8 @@ public class EventView implements Serializable {
     }
       
 	private void popolateModel(MapModel model) {
+		
+		model.getMarkers().clear();
 		
 		int Low = 10;
 		int High = 100;
@@ -93,7 +94,6 @@ public class EventView implements Serializable {
 	}
 	
 	public String riGenerateModel(){
-		simpleModel = new DefaultMapModel();
 		popolateModel(this.simpleModel);
 		return null;
 	}
@@ -140,13 +140,8 @@ public class EventView implements Serializable {
 	}
 
 	public MapModel getSimpleModel() {
-		simpleModel = new DefaultMapModel();
 		popolateModel(simpleModel);
 		return simpleModel;
-	}
-
-	public void setSimpleModel(MapModel simpleModel) {
-		this.simpleModel = simpleModel;
 	}
 
 	public Integer getRefresh() {
